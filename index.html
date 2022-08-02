@@ -2,70 +2,127 @@
 <title>Random Interview Question</title>
 <body bgcolor="#FFFFFF">
 <center>
-    <div style="font-size: 50px; margin-top:  100px;">
+    <div style="font-size: 50px; margin-top:  50px;margin-bottom:  100px;">
         Fulbright Interview Questions
+    </div>
+    <div style="font-size: 20px; margin-top: 50px;margin-bottom: 50px;">
+        This web-site inclue sound. <br>
+        (If you do not want sound please turn down the volume)
     </div>
 </center>
 
 <center>
-
-
-<div style="font-size: 30px; font-weight: bold; margin:50px;padding: 30px;">
-
+    
     <img style="width: 25cm; padding-bottom: 30px;" src="Zoom-ful.JPG">
+
     <br>
 
-</a> 
-<script language="JavaScript">
-    
-    function random_text(){};
+    <br>
 
-    var random_text = new random_text();
-    // Set the number of text strings to zero to start
-    var number = 0;
-    // Incremental list of all possible Text
+    <div style="font-size: 30px;padding-bottom: 50px;" id ="Question">Question: </div>
     
-    random_text[number++] = "Introduce yourself."
-    random_text[number++] = "Why do you want to study a Master’s/PhD program?"
-    random_text[number++] = "Explain your study objective and why it is important."
-    random_text[number++] = "Why do you want to go to the US to study?"
-    random_text[number++] = "Tell us the schools you want to go / professors you want to work with."
-    random_text[number++] = "What is your future plan after your study in the United States?"
-    random_text[number++] = "How will you contribute to the KR-US relationship?"
-    random_text[number++] = "Explain further about the research experience you have"
-    random_text[number++] = "Describe a research method you are interested in."
-    random_text[number++] = "Describe your relationships with whom you have been recommended by."
-    random_text[number++] = "What is your life motto?"
-    random_text[number++] = "What is your favorite book / movie?"
-    random_text[number++] = "What are your strengths and weaknesses?"
-    random_text[number++] = "Do you plan to apply for other scholarships?"
-    random_text[number++] = "Any last words?"
-    random_text[number++] = "Tell me about the research you'd like to do while phd"
-    random_text[number++] = "Tell me about your plan after phd"
-    random_text[number++] = "Why should we select you?"
-    random_text[number++] = "Did you apply for other scholarships?"
-    random_text[number++] = "Please explain your strengths and weaknesses"
-    random_text[number++] = "Is there any case in which the field of study is being actively studied in the United States"
-    random_text[number++] = "What are you planning to do if you fail the scholarship?"
-    random_text[number++] = "What is the biggest mistake you have made?"
-    random_text[number++] = "Who is your role model?"
-    random_text[number++] = "Tell me about your leadership experience"
-    random_text[number++] = "What personal achievements are you proud of?"
-    random_text[number++] = "How can your research help America and Korea?"
-    random_text[number++] = "How can your research help the relationship between the United States and Korea?"
-    random_text[number++] = "Tell me about the challenge you overcome"
-    
-    // Create a random number with limits based on the number
-    // of possible random text stringsvar 
-    random_number = Math.floor(Math.random() * number);
-    // Write out the random text to the browser
-    document.write("Question: " + random_text[random_number]);
+    <button style="font-size: 30px;" id="btn-read">Next Question</button>
 
-</script>
+    <br>
+
+    <br>
+
+    <script language="JavaScript">
+        
+        var pre_index = 0 
+
+        function speak(text, opt_prop) {
+
+        if (typeof SpeechSynthesisUtterance === "undefined" || typeof window.speechSynthesis === "undefined") {
+            alert("이 브라우저는 음성 합성을 지원하지 않습니다.")
+            return
+        }
+        
+        window.speechSynthesis.cancel() // 현재 읽고있다면 초기화
+
+        const prop = opt_prop || {}
+
+        const speechMsg = new SpeechSynthesisUtterance()
+        speechMsg.rate = prop.rate || 0.9 // 속도: 0.1 ~ 10      
+        speechMsg.pitch = prop.pitch || 1 // 음높이: 0 ~ 2
+        speechMsg.lang = prop.lang || "en-US"
+        speechMsg.text = text
+        
+        // SpeechSynthesisUtterance에 저장된 내용을 바탕으로 음성합성 실행
+        window.speechSynthesis.speak(speechMsg)
+        }
+
+
+        // 이벤트 영역
+    
+        const btnRead = document.getElementById("btn-read")
+
+        btnRead.addEventListener("click", e => {
+
+            //history.go(0)
+            random_number = randomNumberGenerator()
+
+            read_text()
+            
+            var el = document.getElementById("Question");
+            el.textContent = random_text[random_number]
+
+        })
+
+        function read_text(){
+
+            // 소리 읽어주는 함수
+
+            speak(random_text[random_number], { rate: 1, pitch: 1.2, lang: "en-US"})
+
+        };
+
+        function randomNumberGenerator()
+        {
+            random_num = Math.floor(Math.random() * 20);
+            return random_num
+        }
+
+        function random_text(){}; // 리스트 생성
+
+        var random_text = new random_text();
+        // Set the number of text strings to zero to start
+        var number = 0;
+        random_number = 0;
+        // Incremental list of all possible Text
+    
+        random_text[0] = "Introduce yourself."
+        random_text[1] = "Why do you want to study a Master’s/PhD program?"
+        random_text[2] = "Explain your study objective and why it is important."
+        random_text[3] = "Why do you want to go to the US to study?"
+        random_text[4] = "Tell us the schools you want to go / professors you want to work with."
+        random_text[5] = "What is your future plan after your study in the United States?"
+        random_text[6] = "How will you contribute to the KR-US relationship?"
+        random_text[7] = "Explain further about the research experience you have"
+        random_text[8] = "Describe a research method you are interested in."
+        random_text[9] = "Describe your relationships with whom you have been recommended by."
+        random_text[10] = "What is your life motto?"
+        random_text[11] = "What is your favorite book / movie?"
+        random_text[12] = "What are your strengths and weaknesses?"
+        random_text[13] = "Do you plan to apply for other scholarships?"
+        random_text[14] = "Any last words?"
+        random_text[15] = "Tell me about the research you'd like to do while phd"
+        random_text[16] = "Tell me about your plan after phd"
+        random_text[17] = "Why should we select you?"
+        random_text[18] = "Did you apply for other scholarships?"
+        random_text[19] = "Please explain your strengths and weaknesses"
+        random_text[20] = " Is there any case in which the field of study is being actively studied in the United States"
+        // Create a random number with limits based on the number
+        // of possible random text stringsvar 
+        
+        //random_number = Math.floor(Math.random() * 20);
+        // Write out the random text to the browser
+        //document.write("Question: " + random_text[random_number]);
+
+    </script>
 
 
 <br> <br> <br>
-Click <a href="javascript:history.go(0);">Next Question</a></body>
 </div>
 </center>
 
